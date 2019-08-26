@@ -1,44 +1,25 @@
 'use strict';
 
-let money = prompt('Ваш бюджет на месяц?', ''),
-    time = prompt('Введите дату в формате YYYY-MM-DD', ''),
-    appData = { 
-        budjet: money,          // бюджет на месяц
-        timeData: time,         // дата
-        expenses: {},           // объект с обязательными расходами
-        optionalExpenses: {},   // объект с дополнительными расходами
-        income: [],
-        savings: false,
-    };
+let num = 50;
 
-for (let i = 0; i < 2; i++) {
+// while (num < 55) {
+//     console.log(num);
+//     num++;    
+// }
 
-    let state = prompt('Введите обязательную статью расходов в этом месяце', ''),
-        number = prompt('Во сколько обойдется?', '');
-    
-    appData.expenses[state] = number;
-}
+// do {
+//     console.log(num);
+//     num++;    
+// } while (num < 55)
 
-/** Функция расчёта бюджета на один день.
-Алгоритм расчёта:
-    из месячного бюджета вычитаем обязательные расходы, 
-    оставшуюся сумму делим на 30 (дней в месяце).*/
 
-function getBudget() {
-    let expensesAmount = 0;
-    
-    for (let key in appData.expenses) {
-        
-        expensesAmount += +appData.expenses[key];
+// Вывести все чётные числа от 0 до 10 кроме самого 10
+for (let i = 1; i < 100; i++) {
+    if (i % 2 != 0) {
+        continue;
     }
-    
-    return (appData.budjet - expensesAmount) / 30;
+    if (i == 10) {
+        break;
+    }
+    console.log(i);
 }
-
-if ( isNaN(getBudget()) ) {
-    document.getElementById('budget').innerHTML = 'Введены не корректные данные!';
-} else {
-    document.getElementById('budget').innerHTML = 'Бюджет на один день: ' + getBudget().toFixed(2) + ' р.';
-}
-
-console.log(appData);
