@@ -1,33 +1,44 @@
 'use strict';
 
-// Made variable
-let num = 50;
+let money = prompt('Ваш бюджет на месяц?', ''),
+    time = prompt('Введите дату в формате YYYY-MM-DD', ''),
+    appData = { 
+        budjet: money,          // бюджет на месяц
+        timeData: time,         // дата
+        expenses: {},           // объект с обязательными расходами
+        optionalExpenses: {},   // объект с дополнительными расходами
+        income: [],
+        savings: false,
+    };
 
-// Сonditional operator
-if(num < 49) {
-    console.log('Not true');
-} else if (num > 100) {
-    console.log('It\'s a lot of');
+for (let i = 0; i < 2; i++) {
+
+    let state = prompt('Введите обязательную статью расходов в этом месяце', ''),
+        number = prompt('Во сколько обойдется?', '');
+    
+    appData.expenses[state] = number;
+}
+
+/** Функция расчёта бюджета на один день.
+Алгоритм расчёта:
+    из месячного бюджета вычитаем обязательные расходы, 
+    оставшуюся сумму делим на 30 (дней в месяце).*/
+
+function getBudget() {
+    let expensesAmount = 0;
+    
+    for (let key in appData.expenses) {
+        
+        expensesAmount += +appData.expenses[key];
+    }
+    
+    return (appData.budjet - expensesAmount) / 30;
+}
+
+if ( isNaN(getBudget()) ) {
+    document.getElementById('budget').innerHTML = 'Введены не корректные данные!';
 } else {
-    console.log('True');
+    document.getElementById('budget').innerHTML = 'Бюджет на один день: ' + getBudget().toFixed(2) + ' р.';
 }
 
-// Ternary operator
-(num == 50) ? console.log('True') : console.log('Not true');
-
-
-// Switch
-switch (num) {
-    case num < 49:
-        console.log('Not true');
-        break;
-    case num > 100:
-        console.log('It\'s a lot of');
-        break;
-    case 50:
-        console.log('Bingo');
-        break;
-    default:
-        console.log('True');
-        break;
-}
+console.log(appData);
