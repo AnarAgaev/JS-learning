@@ -1,84 +1,57 @@
 'use strict'
 
-let money = +prompt('Ваш бюджет на месяц?', ''),
-    time = prompt('Выберите дату в формате YYYY-MM-DD', '');
+// let num = 20;
+// function showFirstMessage(text) {
+//     console.log(text);
+//     num = 10;
+// }
+// showFirstMessage('Hello world!');
+// console.log(num);
 
-let appData = {
-    budget: money,
-    expenses: {},
-    optionExpenses: {},
-    income: [],
-    timeData: time,
-    savings: false,
-};
-
-for (let i = 0; i < 2; i++) {
-    let a = prompt('Введите обязательную статью расходов в этом месяце', ''),
-        b = prompt('Во сколько обойдётся?', '');
-    
-    if (typeof a === 'string' && 
-        typeof a != null && 
-        typeof b != null && 
-        a != '' && 
-        b != '' && 
-        a.length < 50) {
-        appData.expenses[a] = b;
-    } else {
-        console.log('Not done');
-        
-    }
-}
-
-// Та же логика но с использование цикла While
-// let i = 0;
-// while (i < 2) {
-
-//     let a = prompt('Введите обязательную статью расходов в этом месяце', ''),
-//         b = prompt('Во сколько обойдётся?', '');
-
-//     if (typeof a === 'string' &&
-//         typeof a != null &&
-//         typeof b != null &&
-//         a != '' &&
-//         b != '' &&
-//         a.length < 50) {
-//         appData.expenses[a] = b;
-//     } else {
-//         console.log('Not done');
-//     }
-//     i++;
+// let calc = function calc(a, b) {
+//     return a + b;
 // }
 
-// Та же логика но с использование цикла While
-// let i = 0;
-// do {
-//     let a = prompt('Введите обязательную статью расходов в этом месяце', ''),
-//         b = prompt('Во сколько обойдётся?', '');
+// Пример стрелочной функции
+// let calc = (a,b) => a + b;
+// console.log(calc(3, 4));
+// console.log(calc(8, 4));
+// function retVar() {
+//     let num = 50;
+//     return num;
+// }
+// let anotherNum = retVar();
+// console.log(anotherNum);
 
-//     if (typeof a === 'string' &&
-//         typeof a != null &&
-//         typeof b != null &&
-//         a != '' &&
-//         b != '' &&
-//         a.length < 50) {
-//         appData.expenses[a] = b;
-//     } else {
-//         console.log('Not done');
+// let str = 'test';
+// console.log(str.length);
+// console.log(str.toUpperCase());
+// console.log(str.toLocaleLowerCase());
 
-//     }
-//     i++;
-// } while (i < 2);
+// let twelve = '12.2px';
+// console.log(Math.round(twelve));
+// console.log(parseInt(twelve));
+// console.log(parseFloat(twelve));
 
-appData.maneyPreDay = appData.budget / 30;
+// let str = 'quote: "... Yes, i am..."';
+// console.log(str);
 
-console.log('Ежедневный бюджет: ' + appData.maneyPreDay);
+let calc = (a, b) => a + b;
+console.log(`1 + 2 = ${calc(1, 2)}.`);
 
-if (appData.maneyPreDay < 100) {
-    console.log('Минимальный уровень достатка.');    
-} else if (appData.maneyPreDay > 100 && appData.maneyPreDay < 2000) {
-    console.log('Средний уровень достатка.');
-} else if (appData.maneyPreDay > 2000) {
-    console.log('Высокий уровень достатка.');
-} else {
-    console.log('Произошла ошибка');    
-}
+let guestList = `Guests:
+    * John
+    * Pete
+    * Mary`;
+console.log(guestList);
+
+let guestList2 = "Guests:\n * John\n * Pete\n * Mary";
+console.log(guestList2);
+
+console.log("\u00A9");
+
+// Длинные юникодные коды
+// 佫, редкий китайский иероглиф
+console.log("\u{20331}");
+// 😍, лицо с улыбкой и глазами в форме сердец
+console.log("\u{1F60D}");
