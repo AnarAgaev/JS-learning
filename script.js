@@ -1,25 +1,84 @@
-'use strict';
+'use strict'
 
-let num = 50;
+let money = +prompt('Ваш бюджет на месяц?', ''),
+    time = prompt('Выберите дату в формате YYYY-MM-DD', '');
 
-// while (num < 55) {
-//     console.log(num);
-//     num++;    
+let appData = {
+    budget: money,
+    expenses: {},
+    optionExpenses: {},
+    income: [],
+    timeData: time,
+    savings: false,
+};
+
+// for (let i = 0; i < 2; i++) {
+    let a = prompt('Введите обязательную статью расходов в этом месяце', ''),
+        b = prompt('Во сколько обойдётся?', '');
+    
+    if (typeof a === 'string' && 
+        typeof a != null && 
+        typeof b != null && 
+        a != '' && 
+        b != '' && 
+        a.length < 50) {
+        appData.expenses[a] = b;
+    } else {
+        console.log('Not done');
+        
+    }
+}
+
+// Та же логика но с использование цикла While
+// let i = 0;
+// while (i < 2) {
+
+//     let a = prompt('Введите обязательную статью расходов в этом месяце', ''),
+//         b = prompt('Во сколько обойдётся?', '');
+
+//     if (typeof a === 'string' &&
+//         typeof a != null &&
+//         typeof b != null &&
+//         a != '' &&
+//         b != '' &&
+//         a.length < 50) {
+//         appData.expenses[a] = b;
+//     } else {
+//         console.log('Not done');
+//     }
+//     i++;
 // }
 
+// Та же логика но с использование цикла While
+// let i = 0;
 // do {
-//     console.log(num);
-//     num++;    
-// } while (num < 55)
+//     let a = prompt('Введите обязательную статью расходов в этом месяце', ''),
+//         b = prompt('Во сколько обойдётся?', '');
 
+//     if (typeof a === 'string' &&
+//         typeof a != null &&
+//         typeof b != null &&
+//         a != '' &&
+//         b != '' &&
+//         a.length < 50) {
+//         appData.expenses[a] = b;
+//     } else {
+//         console.log('Not done');
 
-// Вывести все чётные числа от 0 до 10 кроме самого 10
-for (let i = 1; i < 100; i++) {
-    if (i % 2 != 0) {
-        continue;
-    }
-    if (i == 10) {
-        break;
-    }
-    console.log(i);
+//     }
+//     i++;
+// } while (i < 2);
+
+appData.maneyPreDay = appData.budget / 30;
+
+console.log('Ежедневный бюджет: ' + appData.maneyPreDay);
+
+if (appData.maneyPreDay < 100) {
+    console.log('Минимальный уровень достатка.');    
+} else if (appData.maneyPreDay > 100 && appData.maneyPreDay < 2000) {
+    console.log('Средний уровень достатка.');
+} else if (appData.maneyPreDay > 2000) {
+    console.log('Высокий уровень достатка.');
+} else {
+    console.log('Произошла ошибка');    
 }
