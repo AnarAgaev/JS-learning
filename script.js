@@ -1,25 +1,34 @@
 'use strict'
 
-function first() {
-    setTimeout(function() {
-        console.log(1);             
-    }, 500);
+let ob = new Object(),
+    options = {
+        widht: 1024,
+        heigh: 720,
+        name: "test",
+    };
+
+console.log(options.name);
+
+options.bool = false;
+options.colors = {
+    border: 'black',
+    bg: 'red',
 }
 
-function second() {
-    console.log(2);
+console.log(options);
+
+function printObj(object) {
+    for (let key in object) {
+        if (typeof object[key] == 'object') {
+            console.log(' Inner Object: ');
+            printObj(object[key]);
+            console.log('');
+            
+        } else {
+            console.log(key + ': ' + object[key]);
+        }
+    }
 }
+printObj(options);
 
-first();
-second();
-
-function learnJs(lang, callback) {
-    console.log('I learn ' + lang);
-    callback();
-}
-
-function done() {
-    console.log('I made threeth Exaplse!'); 
-}
-
-learnJs('JavaScript', done);
+console.log(Object.keys(options).length);
