@@ -1,42 +1,51 @@
 'use strict'
 
-let box 		= document.getElementById('box'),				// получаем один элемент с уникальным ID
-	btn 	    = document.getElementsByTagName('button'),		// получаем html коллекцию, доступ к элементу как к элементу массива
-	heart 		= document.querySelectorAll('.heart'),			// получаем html коллекцию, доступ к элементу как к элементу массива
-	circle 		= document.getElementsByClassName('circle'),	// получаем html коллекцию, доступ к элементу как к элементу массива
-	firstHeart 	= document.querySelector('.heart'),				// получаем ОДИН - первый элемент удовлетворяющий данному селектору
-	wrapper 	= document.querySelector('.wrapper');
+let btn = document.querySelectorAll('button'),
+	wrap = document.querySelector('.wrapper'),
+	link = document.querySelector('a');
 
-box.style.backgroundColor = 'blue';
-btn[1].style.borderRadius = '100%';
+// btn[0].onclick = function () {
+// 	console.log('asdf');
+// };
 
-circle[0].style.backgroundColor = 'red';
-circle[1].style.backgroundColor = 'yellow';
-circle[2].style.backgroundColor = 'green';
+// btn[0].onclick = function () {
+// 	console.log('Hello world!');
+// };
 
-for (let i = 0; i < heart.length; i++) {
-	heart[i].style.backgroundColor = 'gold';
-}
+// btn[0].addEventListener('click', function() {
+// 	console.log('Push button one');
+// });
 
-heart.forEach(function (item, index, hearts) {
-	item.style.backgroundColor = 'pink';
+// btn[0].addEventListener('click', function() {
+// 	console.log('Push button one too');
+// });
+
+// btn[0].addEventListener('mouseenter', function() {
+// 	console.log('Mouse under first button.');
+// });
+
+btn[0].addEventListener('click', function (event) {
+	let target = event.target;
+
+	event.stopPropagation();
+	// target.style.display = 'none';
+
+	console.log('There is event: ' + event.type + ' on element: ' + event.target);
+	// console.log(target);
+	// console.log(event);
 });
 
-let div  = document.createElement('div'),
-	text = document.createTextNode('Hello world!');
+wrap.addEventListener('click', function (event) {
+	console.log('There is event: ' + event.type + ' on element: ' + event.target);
+});
 
-div.classList.add('gold-figure');
+link.addEventListener('click', function (evt) {
+	evt.preventDefault();
+	console.log('There is event: ' + event.type + ' on element: ' + event.target);
+});
 
-// document.body.appendChild(div);
-// wrapper.appendChild(div);
-// div.innerHTML = '<h2>Hello world!</h2>';
-div.textContent = 'Hello world!';
-div.textContent = text.wholeText;
-
-document.body.insertBefore(div, circle[1]);
-document.body.removeChild(circle[1]);
-wrapper.removeChild(heart[1]);
-document.body.replaceChild(btn[1], circle[1]);
-
-console.log(div);
-console.log(typeof text);
+btn.forEach(function (item) {
+	item.addEventListener('mouseleave', function(event){
+		console.log('Go away.');
+	});
+});
