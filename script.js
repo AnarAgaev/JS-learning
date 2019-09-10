@@ -1,51 +1,64 @@
 'use strict'
 
-let btn = document.querySelectorAll('button'),
-	wrap = document.querySelector('.wrapper'),
-	link = document.querySelector('a');
+// let timedId = setTimeout(sayHello, 3000);
+// clearTimeout(timedId);
 
-// btn[0].onclick = function () {
-// 	console.log('asdf');
-// };
+// let timedId = setInterval(sayHello, 3000);
+// clearTimeout(timedId);
 
-// btn[0].onclick = function () {
+// function sayHello() {
 // 	console.log('Hello world!');
-// };
+// }
 
-// btn[0].addEventListener('click', function() {
-// 	console.log('Push button one');
+// let timerId = setTimeout(function log() {
+// 	console.log("Hello");
+// 	setTimeout(log , 2000);
 // });
 
-// btn[0].addEventListener('click', function() {
-// 	console.log('Push button one too');
+let button = document.getElementsByTagName('button'),
+	element = document.querySelector('.box'),
+	btnBlock = document.querySelector('.btn-block'),
+	buttons = document.querySelectorAll('.btn-block button');
+
+
+function animation () {
+	let position = 0,
+		id = setInterval( frame, 10 );
+
+	function frame () {
+		if ( position == 400 ) {
+			clearInterval( id );
+		} else {
+			position++;
+			element.style.top = position + 'px';
+			element.style.left = position + 'px';
+		}
+	}
+}
+
+button[0].addEventListener( 'click', animation );
+
+// btnBlock.addEventListener('click',  (event) => {
+// 	if ( event.target && event.target.tagName == 'BUTTON' ) {
+// 		console.log(event.target.tagName);		
+// 	}
+// } );
+
+// btnBlock.addEventListener('click', (event) => {
+// 	if ( event.target && event.target.classList.contains('first') ) {
+// 		console.log(event.target.tagName);
+// 		console.log(event.target);
+// 	}
 // });
 
-// btn[0].addEventListener('mouseenter', function() {
-// 	console.log('Mouse under first button.');
-// });
+btnBlock.addEventListener('click', (event) => {
+	if ( event.target && event.target.matches('button.first') ) {
+		
+		console.log(event.target.tagName);
+		
+		console.log(event.target);
 
-btn[0].addEventListener('click', function (event) {
-	let target = event.target;
-
-	event.stopPropagation();
-	// target.style.display = 'none';
-
-	console.log('There is event: ' + event.type + ' on element: ' + event.target);
-	// console.log(target);
-	// console.log(event);
+	}
 });
 
-wrap.addEventListener('click', function (event) {
-	console.log('There is event: ' + event.type + ' on element: ' + event.target);
-});
 
-link.addEventListener('click', function (evt) {
-	evt.preventDefault();
-	console.log('There is event: ' + event.type + ' on element: ' + event.target);
-});
-
-btn.forEach(function (item) {
-	item.addEventListener('mouseleave', function(event){
-		console.log('Go away.');
-	});
-});

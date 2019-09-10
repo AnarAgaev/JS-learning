@@ -1,60 +1,43 @@
-.box {
-	width: 130px;
-	height: 130px;
-	background: red;
-	margin-bottom: 20px;
-}
-
 button {
-	width: 100px;
-	height: 30px;
-	background-color: black;
-	border: none;
-	border-radius: 5px;
-	color: white;
-	margin-bottom: 20px;
-}
-
-.circle {
-	width: 70px;
-	height: 70px;
-	background-color: blue;
-	border-radius: 50%;
-	margin-bottom: 10px;
-}
-
-.heart {
 	display: inline-block;
-	position: relative;
-	width: 50px;
-	height: 80px;
-	background-color: red;
-	margin-top: 10px;
-	margin-left: 15px;
-    margin-right: 40px;
-	border-radius: 25px 25px 0 0;
-	transform: rotate(315deg);
-}
-.heart::before {
-  position: absolute;
-  width: 80px;
-  height: 50px;
-  left: 0;
-  bottom: 0;
-  content: "";
-  background-color: red;
-  border-radius: 0 25px 25px 0;
+	background-color: gold;
+	width: 150px;
+	height: 50px;
+	border: none;
+	font-weight: bold;
+	color: blue;
+	font-size: 16px;
+	cursor: pointer;
 }
 
-.gold-figure {
-	width: 150px;
-	height: 70px;
-	background-color: gold;
-	margin-top: 20px;
-	margin-bottom: 20px;
+.container {
+	width: 500px;
+	height: 500px;
+	border: 3px solid red;
+	margin: 20px 0;
+	position: relative;
+}
+
+.box {
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	background-color: blue;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+.btn-block {
 	display: flex;
-	justify-content: center;
-	align-items: center;
-	color: red;
-	font-weight: bold;
+	padding: 10px;
+	background-color: #ccc;
+}
+
+.btn-block button {
+	list-style: none;
+	width: 150px;
+	height: 60px;
+	background-color: gold;
+	margin-right: 10px;
 }
