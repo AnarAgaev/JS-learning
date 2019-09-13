@@ -1,64 +1,68 @@
 'use strict'
 
-// let timedId = setTimeout(sayHello, 3000);
-// clearTimeout(timedId);
+let box = document.querySelector('.box'),
+	btn = document.querySelector('button'),
+	width = box.clientWidth,
+	height = box.clientHeight;
 
-// let timedId = setInterval(sayHello, 3000);
-// clearTimeout(timedId);
 
-// function sayHello() {
-// 	console.log('Hello world!');
+console.log(width);
+console.log(height);
+console.log(box.getBoundingClientRect());
+
+console.log(document.documentElement.clientWidth);
+console.log(document.documentElement.clientHeight);
+console.log(document.documentElement.scrollTop);
+
+// btn.addEventListener('click', () => {
+// 	box.style.height = box.scrollHeight + 'px';
+// });
+	
+// btn.addEventListener('click', () => {
+// 	console.log(box.scrollTop);
+// });
+	
+// btn.addEventListener('click', () => {
+// 	box.scrollTop = 0;
+// });
+
+
+scrollBy(0, 200);
+scrollTo(0, 200);
+
+
+
+// let linkNav = document.querySelectorAll('[href^="#"]'), //выбираем все ссылки к якорю на странице
+// 	V = 1;  // скорость, может иметь дробное значение через точку (чем меньше значение - тем больше скорость)
+
+// for (let i = 0; i < linkNav.length; i++) {
+	
+// 	linkNav[i].addEventListener('click', function (event) { //по клику на ссылку
+		
+// 		event.preventDefault(); //отменяем стандартное поведение
+		
+// 		let w = window.pageYOffset,  // производим прокрутка
+// 			hash = this.href.replace(/[^#]*(.*)/, '$1');  // к id элемента, к которому нужно перейти
+		
+// 		t = document.querySelector(hash).getBoundingClientRect().top,  // отступ от окна браузера до id
+// 		start = null;
+	
+// 		requestAnimationFrame(step);  // подробнее про функцию анимации [developer.mozilla.org]
+		
+// 		function step(time) {
+			
+// 			if (start === null) start = time;
+			
+// 			let progress = time - start,
+// 				r = (t < 0 ? Math.max(w - progress / V, w + t) : Math.min(w + progress / V, w + t));
+			
+// 				window.scrollTo(0, r);
+			
+// 			if (r != w + t) {
+// 				requestAnimationFrame(step)
+// 			} else {
+// 				location.hash = hash  // URL с хэшем
+// 			}
+// 		}
+// 	}, false);
 // }
-
-// let timerId = setTimeout(function log() {
-// 	console.log("Hello");
-// 	setTimeout(log , 2000);
-// });
-
-let button = document.getElementsByTagName('button'),
-	element = document.querySelector('.box'),
-	btnBlock = document.querySelector('.btn-block'),
-	buttons = document.querySelectorAll('.btn-block button');
-
-
-function animation () {
-	let position = 0,
-		id = setInterval( frame, 10 );
-
-	function frame () {
-		if ( position == 400 ) {
-			clearInterval( id );
-		} else {
-			position++;
-			element.style.top = position + 'px';
-			element.style.left = position + 'px';
-		}
-	}
-}
-
-button[0].addEventListener( 'click', animation );
-
-// btnBlock.addEventListener('click',  (event) => {
-// 	if ( event.target && event.target.tagName == 'BUTTON' ) {
-// 		console.log(event.target.tagName);		
-// 	}
-// } );
-
-// btnBlock.addEventListener('click', (event) => {
-// 	if ( event.target && event.target.classList.contains('first') ) {
-// 		console.log(event.target.tagName);
-// 		console.log(event.target);
-// 	}
-// });
-
-btnBlock.addEventListener('click', (event) => {
-	if ( event.target && event.target.matches('button.first') ) {
-		
-		console.log(event.target.tagName);
-		
-		console.log(event.target);
-
-	}
-});
-
-
