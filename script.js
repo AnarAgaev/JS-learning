@@ -1,40 +1,61 @@
 'use strict'
-class Animal {
-
-	constructor(name) {
-		this.speed = 0;
-		this.name = name;
+class Clock {
+	constructor({ template }) {
+		this.template = template;
 	}
 
-	run(speed) {
-		this.speed += speed;
-		alert(`${this.name} бежит со скоростью ${this.speed}.`);
-	}
+	render() {
+		let date = new Date();
 
-	stop() {
-		this.speed = 0;
-		alert(`${this.name} стоит.`);
-	}
+		let hours = date.getHours();
+		if (hours < 10) hours = '0' + hours;
 
-}
+		let mins = date.getMinutes();
+		if (mins < 10) mins = '0' + mins;
 
-class Rabbit extends Animal {
+		let secs = date.getSeconds();
+		if (secs < 10) secs = '0' + secs;
 
-	constructor(name, earLength) {
-		super(name);
-		this.earLength = earLength;
-	}
+		let output = this.template
+			.replace('h', hours)
+			.replace('m', mins)
+			.replace('s', secs);
 
-	hide() {
-		alert(`${this.name} прячется!`);
+		console.log(output);
 	}
 
 	stop() {
-		super.stop(); // вызываем родительский метод stop
-		this.hide(); // и затем hide
+		clearInterval(this.timer);
+	}
+
+	start() {
+		this.render();
+		this.timer = setInterval(() => this.render(), 1000);
 	}
 }
 
-let rabbit = new Rabbit("Белый кролик", 10);
-alert(rabbit.name); // Белый кролик
-alert(rabbit.earLength); // 10
+class ExtendedClock extends Clock {
+	constructor(options) {
+		super(options);
+		let { precision = 1000 } = options;
+		this.precision = precision;
+	}
+
+	start() {
+		this.render();
+		this.timer = setInterval(() => this.render(), this.precision);
+	}
+};
+
+
+// let clock = new Clock({
+// 	template: 'h:m:s'
+// });
+// clock.start();
+
+let lowResolutionClock = new ExtendedClock({
+	template: 'h:m:s',
+	precision: 10000
+});
+
+lowResolutionClock.start();
