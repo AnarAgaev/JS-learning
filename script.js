@@ -1,53 +1,40 @@
 'use strict'
+class Animal {
 
-// function User(name, id) {
-// 	this.name = name;
-// 	this.id = id;
-// 	this.human = true;
-// 	this.hello = () => {
-// 		console.log('Hello ' + this.name);		
-// 	}
-// }
-
-// User.prototype.exit = function(name) {
-// 	console.log('User ' + this.name + ' is log out!');
-// }
-
-// let ivan = new User('Ivan', 25);
-// let alex = new User('Alex', 20);
-
-// console.log(ivan);
-// console.log(alex);
-
-// ivan.exit();
-
-
-// In es6
-
-class User {
-	constructor(name, id) {
+	constructor(name) {
+		this.speed = 0;
 		this.name = name;
-		this.id = id;
-		this.human = true;
 	}
 
-	hello() {
-		console.log(`Hello ${ this.name}`);
+	run(speed) {
+		this.speed += speed;
+		alert(`${this.name} бежит со скоростью ${this.speed}.`);
 	}
 
-	exit() {
-		console.log(`User ${this.name} is log out!`);
+	stop() {
+		this.speed = 0;
+		alert(`${this.name} стоит.`);
+	}
+
+}
+
+class Rabbit extends Animal {
+
+	constructor(name, earLength) {
+		super(name);
+		this.earLength = earLength;
+	}
+
+	hide() {
+		alert(`${this.name} прячется!`);
+	}
+
+	stop() {
+		super.stop(); // вызываем родительский метод stop
+		this.hide(); // и затем hide
 	}
 }
 
-let ivan = new User('Ivan', 25);
-let alex = new User('Alex', 20);
-
-console.log(ivan);
-console.log(alex);
-
-ivan.hello();
-ivan.exit();
-alex.hello();
-alex.exit();
-
+let rabbit = new Rabbit("Белый кролик", 10);
+alert(rabbit.name); // Белый кролик
+alert(rabbit.earLength); // 10
