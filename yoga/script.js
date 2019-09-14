@@ -39,7 +39,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
 
     // Timer
-    let deadline = '2019-10-21';
+    let deadline = '2019-09-14';
 
     function getTimeRemaining (endtime) {
 
