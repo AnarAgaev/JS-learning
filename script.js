@@ -1,61 +1,65 @@
-'use strict'
-class Clock {
-	constructor({ template }) {
-		this.template = template;
+// 'use strict'
+
+// function showThis(a, b) {
+// 	console.log(this);
+// 	function sum() {
+// 		console.log(this);
+// 		return a + b;
+// 	}
+// 	console.log(sum());
+// }
+// showThis(4, 5);
+// showThis(5, 5);
+
+// let obj = {
+// 	a: 20,
+// 	b: 15,
+// 	sum: function () {
+// 		console.log(this);
+// 		function shout() {
+// 			console.log(this);
+// 		}
+// 		shout();
+// 	}
+// };
+// obj.sum();
+
+// let user = {
+// 	name: 'John',
+// };
+
+// function sayName(surname) {
+// 	console.log(this);
+// 	console.log(this.name + ' ' +  surname);
+// }
+
+// console.log(sayName.call(user, 'Smith'));
+// console.log(sayName.apply(user, ['Snow']));
+
+// function count(number) {
+// 	return this * number;
+// }
+
+// let double = count.bind(2);
+// console.log(double(3));
+// console.log(double(10));
+
+
+let btn = document.querySelector('button');
+
+btn.addEventListener('click', function () {
+	console.log(this);
+
+	this.style.backgroundColor = 'red';
+
+	function showThis() {
+		console.log(this);
 	}
-
-	render() {
-		let date = new Date();
-
-		let hours = date.getHours();
-		if (hours < 10) hours = '0' + hours;
-
-		let mins = date.getMinutes();
-		if (mins < 10) mins = '0' + mins;
-
-		let secs = date.getSeconds();
-		if (secs < 10) secs = '0' + secs;
-
-		let output = this.template
-			.replace('h', hours)
-			.replace('m', mins)
-			.replace('s', secs);
-
-		console.log(output);
-	}
-
-	stop() {
-		clearInterval(this.timer);
-	}
-
-	start() {
-		this.render();
-		this.timer = setInterval(() => this.render(), 1000);
-	}
-}
-
-class ExtendedClock extends Clock {
-	constructor(options) {
-		super(options);
-		let { precision = 1000 } = options;
-		this.precision = precision;
-	}
-
-	start() {
-		this.render();
-		this.timer = setInterval(() => this.render(), this.precision);
-	}
-};
-
-
-// let clock = new Clock({
-// 	template: 'h:m:s'
-// });
-// clock.start();
-
-let lowResolutionClock = new ExtendedClock({
-	template: 'h:m:s',
-	precision: 10000
+	showThis();
 });
 
-lowResolutionClock.start();
+
+// 1) Просто вызов функции - window/undefined
+// 2) Метод объекта - this = объект
+// 3) Конструктор (new) - this = новый созданный объект
+// 4) Указание конкретного контекста - call, aply, bind
