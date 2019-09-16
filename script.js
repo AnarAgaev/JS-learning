@@ -1,4 +1,4 @@
-// 'use strict'
+'use strict'
 
 // function showThis(a, b) {
 // 	console.log(this);
@@ -45,21 +45,31 @@
 // console.log(double(10));
 
 
-let btn = document.querySelector('button');
+// let btn = document.querySelector('button');
 
-btn.addEventListener('click', function () {
-	console.log(this);
+// btn.addEventListener('click', function () {
+// 	console.log(this);
 
-	this.style.backgroundColor = 'red';
+// 	this.style.backgroundColor = 'red';
 
-	function showThis() {
-		console.log(this);
-	}
-	showThis();
-});
+// 	function showThis() {
+// 		console.log(this);
+// 	}
+// 	showThis();
+// });
 
 
 // 1) Просто вызов функции - window/undefined
 // 2) Метод объекта - this = объект
 // 3) Конструктор (new) - this = новый созданный объект
 // 4) Указание конкретного контекста - call, aply, bind
+
+
+
+let age = document.getElementById('age');
+
+function showUser(surname, name) {
+	console.log("Пользователь " + surname + " " + name + ", его возраст " + this.value);
+}
+showUser.call(age, 'Ivanov', 'Ivan');
+showUser.apply(age, ['Ivanov', 'Ivan']);
