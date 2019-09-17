@@ -1,75 +1,69 @@
-'use strict'
-
-// function showThis(a, b) {
-// 	console.log(this);
-// 	function sum() {
-// 		console.log(this);
-// 		return a + b;
-// 	}
-// 	console.log(sum());
-// }
-// showThis(4, 5);
-// showThis(5, 5);
-
-// let obj = {
-// 	a: 20,
-// 	b: 15,
-// 	sum: function () {
-// 		console.log(this);
-// 		function shout() {
-// 			console.log(this);
-// 		}
-// 		shout();
-// 	}
-// };
-// obj.sum();
-
-// let user = {
-// 	name: 'John',
-// };
-
-// function sayName(surname) {
-// 	console.log(this);
-// 	console.log(this.name + ' ' +  surname);
-// }
-
-// console.log(sayName.call(user, 'Smith'));
-// console.log(sayName.apply(user, ['Snow']));
-
-// function count(number) {
-// 	return this * number;
-// }
-
-// let double = count.bind(2);
-// console.log(double(3));
-// console.log(double(10));
+'use strict';
 
 
-// let btn = document.querySelector('button');
+// Интерполяция
+let name = "Ivan",
+	age = 30,
+	mail = "ex@mail.ru";
 
-// btn.addEventListener('click', function () {
-// 	console.log(this);
-
-// 	this.style.backgroundColor = 'red';
-
-// 	function showThis() {
-// 		console.log(this);
-// 	}
-// 	showThis();
-// });
+document.write('User ' + name + ' is ' + age + ' years old. His email is ' + mail + '. ');
+document.write(`User ${name} is ${age} years old. His email is ${mail}.`);
 
 
-// 1) Просто вызов функции - window/undefined
-// 2) Метод объекта - this = объект
-// 3) Конструктор (new) - this = новый созданный объект
-// 4) Указание конкретного контекста - call, aply, bind
+// let и const
+function makeArray() {
+	var items = [];
 
-
-
-let age = document.getElementById('age');
-
-function showUser(surname, name) {
-	console.log("Пользователь " + surname + " " + name + ", его возраст " + this.value);
+	for (let i = 0; i < 10; i++) {
+		var item = function() {
+			console.log(i);			
+		};
+		items.push(item);	
+	}
+	return items;
 }
-showUser.call(age, 'Ivanov', 'Ivan');
-showUser.apply(age, ['Ivanov', 'Ivan']);
+
+var arr = makeArray();
+arr[1]();
+arr[3]();
+arr[7]();
+
+
+// Стелочные функции
+let fun = () => {
+	console.log(this);	
+};
+fun();
+
+let obj = {
+	number: 5,
+	sayNumber: function() {
+		let say = () => {
+			console.log(this);
+		};
+		say();
+	},
+};
+obj.sayNumber();
+
+let btn = document.querySelector('button');
+btn.addEventListener('click', function() {
+	let show = () => {
+		console.log(this);		
+	};
+	show();
+});
+
+
+// Параметры по умолчанию
+function calcOrDouble(number, basis = 2) {
+	// basis = basis || 2; ES5 format
+	console.log(number*basis);
+	
+}
+calcOrDouble(3, 5);
+calcOrDouble(6);
+
+
+
+

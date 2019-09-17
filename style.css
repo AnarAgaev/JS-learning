@@ -25,4 +25,5 @@ button {
 	font-weight: bold;
 	border: none;
 	cursor: pointer;
+	border-radius: 999px;
 }
