@@ -1,69 +1,26 @@
 'use strict';
 
-
-// Интерполяция
-let name = "Ivan",
-	age = 30,
-	mail = "ex@mail.ru";
-
-document.write('User ' + name + ' is ' + age + ' years old. His email is ' + mail + '. ');
-document.write(`User ${name} is ${age} years old. His email is ${mail}.`);
-
-
-// let и const
-function makeArray() {
-	var items = [];
-
-	for (let i = 0; i < 10; i++) {
-		var item = function() {
-			console.log(i);			
-		};
-		items.push(item);	
+// Классы
+class Rectangle {
+	constructor(height, widht = 20) {
+		this.height = height;
+		this.widht = widht;
 	}
-	return items;
+
+	calcArea() {
+		return this.height * this.widht;
+	}
 }
 
-var arr = makeArray();
-arr[1]();
-arr[3]();
-arr[7]();
+class MessResault extends Rectangle {
 
-
-// Стелочные функции
-let fun = () => {
-	console.log(this);	
-};
-fun();
-
-let obj = {
-	number: 5,
-	sayNumber: function() {
-		let say = () => {
-			console.log(this);
-		};
-		say();
-	},
-};
-obj.sayNumber();
-
-let btn = document.querySelector('button');
-btn.addEventListener('click', function() {
-	let show = () => {
-		console.log(this);		
-	};
-	show();
-});
-
-
-// Параметры по умолчанию
-function calcOrDouble(number, basis = 2) {
-	// basis = basis || 2; ES5 format
-	console.log(number*basis);
-	
+	sayResault() {
+		console.log(`Resault ${this.height} on ${this.widht} is ${this.height * this.widht}`);
+	}
 }
-calcOrDouble(3, 5);
-calcOrDouble(6);
 
+const square = new Rectangle(10);
+const sayRes = new MessResault(5, 7);
 
-
-
+console.log(square.calcArea());
+console.log(sayRes.sayResault());
