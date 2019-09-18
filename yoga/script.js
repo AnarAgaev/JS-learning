@@ -2,12 +2,13 @@ window.addEventListener('DOMContentLoaded', function () {
 
     'use strict'
 
+    // Tab selector
     let tab = document.querySelectorAll('.info-header-tab'),
         info = document.querySelector('.info-header'),
         tabContent = document.querySelectorAll('.info-tabcontent');
 
     function hideTabContent(a) {
-        for ( let i = a; i < tabContent.length; i++ ) {
+        for(let i = a; i < tabContent.length; i++) {
             tabContent[i].classList.remove('show');
             tabContent[i].classList.add('hide');
         }
@@ -82,8 +83,8 @@ window.addEventListener('DOMContentLoaded', function () {
 
     setClock('timer', deadline);
 
-    // Modal
 
+    // Modal
     let more = document.querySelector('.more'),
         overlay = document.querySelector('.overlay'),
         close = document.querySelector('.popup-close'),
@@ -114,3 +115,35 @@ window.addEventListener('DOMContentLoaded', function () {
     }
 
 });
+
+class Options {
+    
+    constructor(content, height, widht, bg, fontSize, textAlign) {
+        this.content   = content;
+        this.height    = height;
+        this.widht     = widht;
+        this.bg        = bg;
+        this.fontSize  = fontSize;
+        this.textAlign = textAlign;
+    }
+
+    createBlock() {
+        let block = document.createElement('div');
+        block.textContent = this.content;
+        block.style.cssText = `height: ${this.height}; widht: ${this.widht}; background: ${this.bg}; font-size: ${this.fontSize}; text-align: ${this.textAlign};`;
+        document.body.append(block);
+    }
+}
+
+let options = [
+        'Some text',
+        '300px',
+        '500px',
+        '#333',
+        '31px',
+        'center',
+    ],
+    modal = new Options(...options);
+
+modal.createBlock();
+
