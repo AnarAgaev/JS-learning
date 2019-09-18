@@ -1,26 +1,18 @@
 'use strict';
+ 
+let video = ['youtube', 'vimeo', 'rutube'],
+	blogs = ['wordpress', 'livejournal', 'blogger'],
+	internet = [...video, ...blogs, 'vk', 'facebook'];
 
-// Классы
-class Rectangle {
-	constructor(height, widht = 20) {
-		this.height = height;
-		this.widht = widht;
-	}
+console.log(internet);
 
-	calcArea() {
-		return this.height * this.widht;
-	}
+function log(a, b, c) {
+	console.log(a);
+	console.log(b);
+	console.log(c);
+	console.log(a + b + c);
 }
 
-class MessResault extends Rectangle {
+let numbers = [2, 5 ,7];
 
-	sayResault() {
-		console.log(`Resault ${this.height} on ${this.widht} is ${this.height * this.widht}`);
-	}
-}
-
-const square = new Rectangle(10);
-const sayRes = new MessResault(5, 7);
-
-console.log(square.calcArea());
-console.log(sayRes.sayResault());
+log(...numbers);
