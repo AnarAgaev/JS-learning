@@ -1,28 +1,43 @@
-'use strict'
+'use strict';
 
-let drink = true;
+let message = {
+		loading: 'Loading...',
+		failure: 'Something went wrong :( ...',
+	},
+	inputRub = document.getElementById('rub'),
+	inputUsd = document.getElementById('usd');
 
-function shoot() {
-	console.log('Вы сделали выстрел...');
 
-	return new Promise((resolve, reject) => {
-		setTimeout(function () {
-			Math.random() > .5 ? resolve() : reject('Вы промахнулись!');
-		}, 1000);
-	});
-}
+inputRub.addEventListener('input', () => {
 
-shoot()
-	.then(() => console.log('Вы попали в цель'))
-	.then(() => console.log('Вы победили!'))
-	.then(() => drink ? buyBeer() : giveMoney())
-	.catch((mess) => console.log(mess + ' Вы проиграли!'))
-	.finally(() => console.log('Игра завершена.'));
+	// request.open(method, URL, [async, user, password])
+	// status - содержит http код ответа серевера 404, 200 и др.
+	// statusText - тектсовый описание ответа от сервера OK ли NOT FOUND
+	// responseText или просто response - текст ответа сервера (именно эти данныхе возвращаются в Ajax запрос от сервера)
+	// readyState - текущее состояне запроса от 0 до 5 https://developer.mozilla.org/ru/docs/Web/API/XMLHttpRequest/readyState
 
-function buyBeer() {
-	console.log('Вам купили пиво.');
-}
+	function getExchangeRates() {
+		return new Promise((resolve, reject) => {
+			var request = new XMLHttpRequest();
+			request.open('GET', 'current.json', true);
+			request.addEventListener('load', () => {
+				if (request.readyState === 4 && request.status == 200) resolve(request.response);
+				else reject();
+			});
+			request.send();
+		});
+	}
 
-function giveMoney() {
-	console.log('Вам дали денги.');
-}
+	getExchangeRates()
+		.then((data) => {
+			inputUsd.value = message.loading;
+			return data;
+		})
+		.then((data) => {
+			setTimeout(() => {
+				let exchangeRate = JSON.parse(data);
+				inputUsd.value = inputRub.value / exchangeRate.usd;  
+			}, 300);
+		})
+		.catch(() => inputUsd.value = message.failure);
+});
