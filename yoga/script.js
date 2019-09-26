@@ -113,88 +113,60 @@ window.addEventListener('DOMContentLoaded', function () {
         document.body.style.overflow = '';
         document.querySelector('.more-splash').classList.remove('more-splash');
     }
+    
 
     // Forms
     let message = {
-            loading: 'Загрузка',
-            success: 'Спасибо! Скоро мы с Вами свяжемся!',
-            failure: 'Что-то пошло не так :( ...',
-        },
-        form = document.querySelector('.main-form'),
-        input = form.getElementsByTagName('input'),
-        statusMessage = document.createElement('div'),
-        formContact = document.getElementById('form'),
-        inputContact = formContact.getElementsByTagName('input'),
-        statusMessageContact = document.createElement('div');
-        
-        statusMessage.classList.add('status');
-        statusMessageContact.classList.add('status');
+            loading: 'Loading...',
+            success: 'Thanks! We will contact you soon!',
+            failure: 'Something went wrong :( ...',
+        };
 
-    formContact.addEventListener('submit', function(event) {
-        event.preventDefault(); // Остановили отправку формы
-        formContact.appendChild(statusMessageContact); // Добавили в форму блок для сообщения
+    function sendForm(form) {
+        form.addEventListener('submit', event => {
+            event.preventDefault();
+            
+            let input = form.getElementsByTagName('input'),
+                formData = new FormData(form),
+                statusMessage = document.createElement('div');
+            
+            statusMessage.style.cssText = "color: white; padding-top: 10px";
+            form.append(statusMessage);
 
-        let request = new XMLHttpRequest(),
-            formData = new FormData(formContact);
-        request.open('POST', 'server.php');
-        request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        request.send(formData);
-
-        request.addEventListener('readystatechange', function() {
-            if (request.readyState < 4) {
-                statusMessageContact.innerHTML = message.loading;
-            } else if (request.readyState === 4 && request.status == 200) {
-                statusMessageContact.innerHTML = message.success;
-            } else {
-                statusMessageContact.innerHTML = message.failure;
+            function postData(data) {
+                return new Promise((reject, resolve) => {
+                    let request = new XMLHttpRequest();
+                    request.open('POST', 'server.php');
+                    request.setRequestHeader('Content-type', 'application/json: charset= utf-8');
+                    request.send(data);
+                    request.addEventListener('readystatechange', function () {
+                        if (request.readyState < 4) reject();
+                        else if (request.readyState === 4 && request.status == 200) reject();
+                        else resolve();                   
+                    });
+                });
             }
-        });
 
-        for (let i = 0; i < inputContact.length; i++) {
-            inputContact[i].value = '';
-        }
-    });
-
-    form.addEventListener('submit', function(event) {
-        event.preventDefault();
-        form.appendChild(statusMessage);
-
-        let request = new XMLHttpRequest();
-        request.open('POST', 'server.php');
-        // request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');   !!! ДЛЯ ОТПРАВКИ ДАННЫХ С ФОРМЫ
-        request.setRequestHeader('Content-type', 'application/json: charset= utf-8');
-
-        let formData = new FormData(form);
-
-        let obj = {};
-        formData.forEach(function(value, key) {
-            obj[key] = value;
-        });
-
-        let json = JSON.stringify(obj);
-
-        // request.send(formData);   !!! ДЛЯ ОТПРАВКИ ДАННЫХ С ФОРМЫ
-        request.send(json);
-
-        request.addEventListener('readystatechange', function() {
-            if (request.readyState < 4) {
-                statusMessage.innerHTML = message.loading;
-            } else if (request.readyState === 4 && request.status == 200) {
-                statusMessage.innerHTML = message.success;
-            } else {
-                statusMessage.innerHTML = message.failure;
+            function clearForm() {
+                for (let i = 0; i < input.length; i++) {
+                    input[i].value = '';
+                }
             }
+
+            postData(formData)
+                .then(() => {statusMessage.innerHTML = message.loading;})
+                .then(() => { statusMessage.innerHTML = message.success;})
+                .catch(() => {statusMessage.innerHTML = message.failure;})
+                .finally(clearForm());
         });
+    }
 
-        for (let i = 0; i < input.length; i++) {
-            input[i].value = '';
-        }
-    });
-
-
-
+    sendForm(document.querySelector('.main-form'));
+    sendForm(document.getElementById('form'));
 });
 
+
+// Spread-операторы
 class Options {
     
     constructor(content, height, widht, bg, fontSize, textAlign) {
