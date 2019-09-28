@@ -1,43 +1,43 @@
 'use strict';
 
-let message = {
-		loading: 'Loading...',
-		failure: 'Something went wrong :( ...',
-	},
-	inputRub = document.getElementById('rub'),
-	inputUsd = document.getElementById('usd');
+// localStorage.setItem('number', 1);				// Разместить данные в localstorage
+// localStorage.setItem('hello', 'Hello world!'); 	
+// console.log(localStorage.getItem('number'));		// Получить данные из localstorage
+// localStorage.removeItem('number');				// Удалить данные из localstorage
+// localStorage.clear();							// Стереть весь localstorage
 
 
-inputRub.addEventListener('input', () => {
+window.addEventListener('DOMContentLoaded', () => {
 
-	// request.open(method, URL, [async, user, password])
-	// status - содержит http код ответа серевера 404, 200 и др.
-	// statusText - тектсовый описание ответа от сервера OK ли NOT FOUND
-	// responseText или просто response - текст ответа сервера (именно эти данныхе возвращаются в Ajax запрос от сервера)
-	// readyState - текущее состояне запроса от 0 до 5 https://developer.mozilla.org/ru/docs/Web/API/XMLHttpRequest/readyState
+	let checbox = document.getElementById('rememberMe'),
+		checker = document.getElementById('checker'),
+		change = document.getElementById('change'),
+		form = document.getElementById('login'),
+		person = {
+			name: 'Smith',
+			age: 25,
+			tech: ['cell phone', 'laptop']
+		},
+		serializedPerosn = JSON.stringify(person);
 
-	function getExchangeRates() {
-		return new Promise((resolve, reject) => {
-			var request = new XMLHttpRequest();
-			request.open('GET', 'current.json', true);
-			request.addEventListener('load', () => {
-				if (request.readyState === 4 && request.status == 200) resolve(request.response);
-				else reject();
-			});
-			request.send();
-		});
+	if (localStorage.getItem('isChecked') == 'true') {
+		checker.checked = true;
 	}
 
-	getExchangeRates()
-		.then((data) => {
-			inputUsd.value = message.loading;
-			return data;
-		})
-		.then((data) => {
-			setTimeout(() => {
-				let exchangeRate = JSON.parse(data);
-				inputUsd.value = inputRub.value / exchangeRate.usd;  
-			}, 300);
-		})
-		.catch(() => inputUsd.value = message.failure);
+	if (localStorage.getItem('bg') == 'changed') {
+		form.style.backgroundColor = '#ff4756';
+	}
+
+	checbox.addEventListener('click', () => {
+		localStorage.setItem('isChecked', true);
+	});
+
+	change.addEventListener('click', () => {
+		localStorage.setItem('bg', 'changed');
+		form.style.backgroundColor = '#ff4756';
+	});
+
+	localStorage.setItem('user', serializedPerosn);
+	console.log(JSON.parse(localStorage.getItem('user')));
+
 });

@@ -17,18 +17,19 @@
 
 <body>
 
-    <div>
-        <label>
-            RUB
-            <input type="text" id="rub">
-        </label>
+    <div class="login" id="login">
+        <h1 class="login__title">Please login</h1>
+        <form action="#">
+            <input type="text" name="mail" id="mail" placeholder="Email address">
+            <input type="text" name="pass" id="pass" placeholder="Password">
+            <label class="login__check" id="rememberMe">
+                <input type="checkbox" name="saved" id="checker">
+                Remember me
+            </label>
+            <button type="submit" class="login__submit">Login</button>
+        </form>
     </div>
-    <div>
-        <label>
-            USD
-            <input type="text" id="usd">
-        </label>
-    </div>
+    <button id="change">Change form</button>
 
     <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script> -->
     <script src="script.js"></script>
