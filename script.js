@@ -49,21 +49,21 @@
 
 // console.log(number);
 
-let user = (function() {
-	let privat = function() {
-		console.log('I am pravet.');
-	};
+// let user = (function() {
+// 	let privat = function() {
+// 		console.log('I am pravet.');
+// 	};
 
-	let	sayHello = function() {
-		console.log('Hello!');
-	};
+// 	let	sayHello = function() {
+// 		console.log('Hello!');
+// 	};
 
-	return {
-		sayHello: sayHello,
-	};
-}());
+// 	return {
+// 		sayHello: sayHello,
+// 	};
+// }());
 
-console.log(user);
-console.log(user.sayHello());
+// console.log(user);
+// console.log(user.sayHello());
 
 
