@@ -2,8 +2,8 @@ let canvas = document.getElementById('canvas'),
     ctx = canvas.getContext('2d'),
     position = 0,
     size = 0
-    width = canvas.width = document.documentElement.clientWidth,
-    height = canvas.height = document.documentElement.clientHeight;
+    width = canvas.width = document.documentElement.clientWidth - 100,
+    height = canvas.height = document.documentElement.clientHeight - 100;
 
 // canvas.width = document.documentElement.clientWidth;
 // canvas.height = document.documentElement.clientHeight;
